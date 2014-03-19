@@ -2,7 +2,7 @@
 
 {% block corpo %}
 
-<form action="" method="post">
+<form action="{% url 'salvo' %}" method="POST">
 	{% csrf_token %}
 	{{ form.as_p }}
 	<button type="submit" value="Adicionar" />
