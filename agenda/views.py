@@ -15,8 +15,6 @@ def lista(request):
 		{'lista_itens': lista_itens})
 
 def adiciona(request):
-	form = FormItemAgenda(request.POST or None, request.FILES or None)
-	
 	if request.method == 'POST':
 		if form.is_valid():
 			dados = form.cleaned_data
