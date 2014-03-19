@@ -15,17 +15,14 @@ def lista(request):
 		{'lista_itens': lista_itens})
 
 def adiciona(request):
+	form = FormItemAgenda(request.POST or None, request.FILES or None)
+	
 	if request.method == 'POST':
-		form = FormItemAgenda(request.POST, request.FILES)
-
 		if form.is_valid():
 			dados = form.cleaned_data
 			item = ItemAgenda(data=dados['data'], hora=dados['hora'], titulo=dados['titulo'], descricao=dados['descricao'])
 			item.save()
+			
 			return render_to_response("salvo.html", {})
-		else:
-			form = FormItemAgenda()
 
-		return render_to_response("adiciona.html", {'form': form}, context_instance=RequestContext(request))
-	else:
-		return HttpResponse('Método inválido: {}'.format(request.method))
+	return render_to_response("adiciona.html", {'form': form}, context_instance=RequestContext(request))
