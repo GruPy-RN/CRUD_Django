@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'agenda.views.lista'),
-    url(r'^adiciona/$', 'agenda.views.adiciona'),
+    url(r'^adiciona/$', 'agenda.views.adiciona', name='adiciona'),
 )
