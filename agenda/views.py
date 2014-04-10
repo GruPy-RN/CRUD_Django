@@ -35,3 +35,14 @@ def item(request, nr_item):
 		else:
 			form = ItemAgendaForm(instance=item)
 			return render_to_response('item.html', {'form': form}, context_instance=RequestContext(request))
+
+def apaga(request, nr_item):
+	item = get_object_or_404(ItemAgenda, pk=nr_item) # Buscando o item pela chave primária (pk)
+	if request.method == "POST":
+		form = ItemAgendaForm(request.POST, request.FILES, instance=item)
+		if form.is_valid():
+			form.delete()
+			return render_to_response('apagado.html', {})
+		else:
+			form = ItemAgendaForm(instance=item)
+			return render_to_response('item.html', {'form': form}, context_instance=RequestContext(request))
